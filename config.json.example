@@ -1,0 +1,10 @@
+{
+  "username": "YOUR_BOT_USERNAME",
+  "oauth": "oauth:YOUR_OAUTH_TOKEN",
+  "clientId": "YOUR_CLIENT_ID",
+  "channel": "CHANNEL_TO_MONITOR",
+  "responseChance": 0.1,
+  "cooldownSeconds": 30,
+  "debug": false
+}
+

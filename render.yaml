@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ret-emote-bot
+    env: node
+    buildCommand: npm install
+    startCommand: node bot.js
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+
