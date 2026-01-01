@@ -48,7 +48,7 @@ let lastResponseTime = 0;
 
 // Track emote usage: emote name (lowercase) -> Set of usernames who sent it
 let emoteUsage = new Map();
-const MIN_USERS_FOR_RESPONSE = 3;
+const MIN_USERS_FOR_RESPONSE = 2; // Changed from 3 to 2 for your requirement
 
 // Create Twitch client
 // Note: tmi.js debug option logs all IRC messages, so we keep it false to avoid spam
@@ -163,7 +163,7 @@ async function getTwitchUserId(username) {
             }
         } catch (error2) {
             if (config.debug) {
-                console.log('Debug - Could not fetch Twitch ID via API, will try username method');
+                console.log('Debug - Could not fetch Twitch ID, will try username method');
             }
         }
         return null;
@@ -446,10 +446,10 @@ client.on('message', async (channel, tags, message, self) => {
             // Add this user to the set (Set automatically handles duplicates)
             emoteUsage.get(emoteKey).add(username);
             
-            // Check if this emote has been sent by at least 3 different users
+            // Check if this emote has been sent by at least 2 different users (Changed from 3 to 2)
             const userCount = emoteUsage.get(emoteKey).size;
             
-            if (userCount >= MIN_USERS_FOR_RESPONSE) {
+            if (userCount >= 2) {
                 // Check if we should respond (chance + cooldown)
                 if (shouldRespond()) {
                     // Clear the tracking for this emote after responding
@@ -548,4 +548,3 @@ process.on('SIGINT', () => {
     }
     process.exit(0);
 });
-
